@@ -24,12 +24,11 @@ Y = zeros(1, N);
 Y_hat = zeros(1, N);
 
 figure('units', 'normalized', 'outerposition', [0 0 1 1], 'color', 'w')
-gif('SlidingModeObserver.gif')
 for k = 1:N
     y = C*x;
     y_hat = C*x_hat;
     S = y-y_hat;  % Sliding Surface!
-    
+
     % Update Observer State
     x_hat_dot = A*x_hat+B*0+L.*sign(S);
     x_hat = x_hat+x_hat_dot*Ts;  % Euler Integration
@@ -56,6 +55,5 @@ for k = 1:N
         legend('Real State x2', 'SMO State x2');
         yline(0,'DisplayName',""),xlabel("Time [Sn]"),axis([0 10 -.6 1.1])
         drawnow
-        gif
     end
 end
